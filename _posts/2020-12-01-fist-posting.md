@@ -2,12 +2,12 @@
 layout: post
 title: 블로그 개설 기념 첫 포스팅
 categories: [일상]
-tags: [demo, dbyll, dbtek, setup]
+tags: 
 fullview: true
 comments: false
 ---
 
-###**★경축★** 
+### **★경축★** 
 github으로 첫 블로그를 만들어 보았다.
 
 처음 repository를 만들고, theme을 선택하고 configuration을 하기까지 어색하고 익숙치않아 버벅이던 부분이 있었지만, 그래도 결국 이렇게 포스팅까지 할 수 있게 되었다(Yes!) 
