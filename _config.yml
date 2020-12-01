@@ -7,23 +7,23 @@ highlighter: rouge
 markdown: kramdown
 disqus: dbyll
 google_analytics: dbyll
-title: 옥수수수염차의 개발 블로그
+title: Oksusutea's Blog
 
 defaults:
   -
     scope:
       path: "" # empty string for all files
     values:
-      title: dbyll
+      title: Oksusutea's blog
 
 description: Stylish Jekyll Theme
 author:
-  name: 옥수수염차
+  name: oksusutea's blog
   email: cjkim0118@gmail.com
   github: oksusutea
-  bio: 꾸준히 기록하자
+  bio: 꾸준히 기록하려고 만든 블로그
 
-rss_path: feed.xml
+
 categories_path: categories.html
 tags_path: tags.html
 
