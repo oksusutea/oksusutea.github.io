@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Context Switching
-categories: [CS지식]
+categories: [CS]
 tags: [OS]
 description: 컨텍스트 스위칭
 fullview: false
