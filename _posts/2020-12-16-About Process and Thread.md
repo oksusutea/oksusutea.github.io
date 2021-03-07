@@ -16,9 +16,7 @@ comments: true
 ### 프로세스  
 위 프로그램을 더블클릭하여 실행할 때, 메모리에 **적재**되며 실행되고 있는 프로그램의 **인스턴스(독립적 개체)**를 말한다. 객체지향적인 개념에서 생각하였을 때, 클래스와 인스턴스의 관계를 대조하여 생각하는 것과 비슷하다. 하나의 클래스를 토대로 여러 인스턴스를 만들 수 있듯이, 우리가 메모장을 여러개 실행하여 여러 프로세스를 실행할 수 있다.
 
-<center>
-
-![프로세스의 데이터 구성](https://shoark7.github.io/assets/img/knowledge/process.png)
+<p align="center"><img src="https://shoark7.github.io/assets/img/knowledge/process.png"></p>
 
 </center>
 프로세스는 커널에 의해 직접 관리가 되는데, 커널 메모리 내부에는 각 프로세스마다 관리하고 있는 프로세스와 관련된 정보들이 담겨져있다.   
@@ -35,11 +33,8 @@ comments: true
 ### 스레드
 프로세스 내 실행되는 흐름의 단위 스레드라 칭한다. 프로세스의 특정한 수행 경로로, 프로세스가 할당받은 자원을 실행하는 실행 단위라고 볼 수 있다.
 
-<center>
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/213B8E4957E6490F23"></p>
 
-![멀티 스레드 실행 흐름 그림](https://t1.daumcdn.net/cfile/tistory/213B8E4957E6490F23)
-
-</center>
 스레드는 별도의 레지스터와 스택을 할당받지만, Code, Data 및 Heap부분은 공유된다. 이러한 구조로, 스레드를 사용할 떄의 장점은 아래와 같다.  
 +  프로세스 간 통신에 비해 스레드간 통신이 훨씬 간단하다.
 +  시스템간 자원 소모가 줄어든다.
