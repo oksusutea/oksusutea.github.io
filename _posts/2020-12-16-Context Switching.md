@@ -56,17 +56,22 @@ PCB 저장 정보는 아래와 같다 :
 위 그림을 보면 알 수 있듯이, TCB가 PCB보다 데이터가 작다. 같은 프로세스의 스위칭은 TCB 정보만 저장하며, 다른 프로세스간 스위칭을 할 떄에는 PCB/TCB 모두 저장한다.
 
 ### Context Switching 비용
-Context Switching은 task를 변경하는 도중 많은 비용을 발생한다.
+Context Switching은 task를 변경하는 도중 많은 비용을 발생한다.메모리와 레지스터사이의 I/O가 많이 발생하기 때문이다.
 * Cache 초기화  
 * Memory Mapping 초기화  
 * 메모리 접근을 위한 Kernel 실행  
 또한, Context Swtiching시 CPU는 유휴상태에 돌입하며, 컨텍스트 스위칭 외 다른 작업을 할 수 없기에 오버헤드가 발생한다.
 
-#### Process 및 Thread의 cost 비용 비교
+
+#### Process 및 Thread의 Context Swithing 비교
+
+* Process의 Context Switching은 OS 운영체제의 스케쥴러에 의해 발생하며, Thread Context Swtiching은 프로세스 내 스레드 라이브러리를 통해 발생한다.
+* PCS는 메모리 주소, 페이징테이블, 커널 리소스와 캐시를 날리는 것에 반해 TCS는 커널에 들어가고 나가는 비용만 드는것과 비슷하다.( PC, 레지스터, 스택포인터만 업데이트 한다)
+* 일반적으로 PCS의 정보를 변경하는 작업이 TCS의 정보를 변경하는 작업보다 훨씬 더 많은 비용이 소모된다.
 process가 thread보다 비용이 더 많이든다.  
 * thread는 stack영역을 제외하고 모든 메모리(Code, Data, Heap)를 공유하기 때문에, context switching 발생시 stack영역만 변경을 해주면 되기 때문이다.   
 * process Context Swtiching 발생시, 공유하는 데이터가 없으므로 캐쉬가 쌓아놓은 데이터가 무용지물이 되고, 새로운 캐쉬정보를 쌓아야 하기에 process Context Switching에 부담이 된다.  
-	* 캐쉬는 CPU와 메인 메모리 사이에 위치하며, CPU에서 한 번 이상 읽어들인 메모리의 데이터를 저장하고 있다가, CPU가 다시 그 메모리에 저장된 데이터를 요구할 떄, 메인메모리를 통하지 않고 데이터를 전달해준다.
+* 캐쉬는 CPU와 메인 메모리 사이에 위치하며, CPU에서 한 번 이상 읽어들인 메모리의 데이터를 저장하고 있다가, CPU가 다시 그 메모리에 저장된 데이터를 요구할 때, 메인메모리를 통하지 않고 데이터를 전달해준다.
 
 
 #### Interrupt는 언제 발생하는가?
