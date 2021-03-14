@@ -86,7 +86,7 @@ Callable<T> callable = new Callable<T>() {
     }
 ```
 
-코드를 통해서 확인 할 수 있듯이, **`Runnable` 인터페이스를 통해 `run()`메소드 실행시 리턴 값이 없고**, **`Callable`인터페이스를 통해 `call()`메소드 실행시 리턴 값 을 반환**한다.
+코드를 통해서 확인 할 수 있듯이, **`Runnable`은 리턴 값이 없고**, **`Callable`은 generic을 사용해 어떤 타입이던 리턴 값 을 반환**한다. 
 
 ### 작업 처리 요청
 `Runnable`과 `Callable`을 이용해 작업을 생성했으면, 그 뒤에는 쓰레드 풀에 해당 작업을 처리하도록 요청해야 한다.
@@ -96,10 +96,12 @@ Callable<T> callable = new Callable<T>() {
 	* 작업 처리 결과를 반환하지 않는다.
 	* 작업 처리 도중 예외가 발생하면 쓰레드가 종료되고, 해당 쓰레드는 쓰레드 풀에서 제거된다.  
 	* 다른 작업을 처리하기 위해 새로운 쓰레드를 생성한다.
+	* `Runnable`을 작업 큐에 저장한다.  
 * **`submit()`**
 	* 작업 처리 결과를 반환한다(`Future` 반환).
 	* 작업 처리 도중 예외가 발생하더라도 쓰레드는 종료되지 않고 다음 작업을 위해 재사용된다
 	* 쓰레드의 생성 오버헤드를 방지하기 위해 이 함수를 가급적 사용한다.
+	* `Runnable` 혹은 `Callable`을 작업 큐에 저장한다.  
 
 예제 코드 :  
 
@@ -139,6 +141,47 @@ public class ExecutorSample {
 }
 
 ```
+
+
+***
+
+## 블로킹 방식의 작업 완료 통보
+
+`ExecutorService`의 `submit()`메소드는 파라미터로 넘겨준 `Runnable` 혹은 `Callable` 작업을 쓰레드 풀의 작업 큐에 저장하고, 즉시 `Future` 객체를 반환한다.  
+`Future`객체는 작업 결과가 아니라, **작업이 완료될 때까지 기다렸다가 최종 결과를 얻는데 사용**한다. 그래서 `Future`는 **지연 완료(pending Completion)객체**라고 한다.   
+Future의 `get()`메소드 호출 시, 쓰레드가 작업을 완료할 때 까지 블로킹 되었다가 작업을 완료하면 처리 결과를 리턴한다. 이러한 방식을 블로킹을 사용하는 작업 완료 통보 방식이라고 한다.  
+
+**주의** : `Future`의 `get()`메소드는 쓰레드가 작업이 완료될 때 까지 *블로킹*되기 때문에 다른 코드를 실행 할 수 없다. 그래서 `get()`메소드를 호출하는 쓰레드는 **새로운 쓰레드** 혹은 **쓰레드 풀의 또 다른 쓰레드**가 되어야 한다.
+
+
+### `submit()`메소드의 파라미터에 따른 ` future.get()`반환 리턴 타입
+* `submit(Runnable task)` : null 반환
+* `submit(Runnable task, Integer result)` : int 타입 값 반환
+* ` future.get(Callable<String> task)` : String 타입 값 반환 
+쓰레드가 작업 처리 도중 인터럽트되면 `InterruptedException`을 발생시키고, 작업 처리 도중 예외 발생시 `ExceutionException`을 발생시킨다. 그래서 아래와 같이 예외처리를 진행해주어야 한다.
+
+```java
+try{
+    future.get();
+ } catch(InterruptedException e){
+   
+ } catch(ExecutionException e){   
+ 
+}
+```
+
+
+#### 리턴 값이 없는 작업 완료 통보
+리턴 값이 없을 경우, `Runnable`객체로 생성해  `submit(Runnable task)`를 실행한다. 결과 값이 없어도 `Future` 객체를 리턴하는데, 이는 쓰레드가 작업 처리를 정상적으로 완료했는지, 예외가 발생했는지 확인하기 위해서다.
+
+
+
+#### 리턴 값이 있는 작업 완료 통보. 
+쓰레드가 작업을 완료 한 후, 처리 결과를 얻어야 한다면 작업 객체를 `Callable`로 생성한다.   
+`submit()`메소드는 작업 큐에 `Callable` 객체를 저장하고 즉시 `Future`를 리턴한다.  
+쓰레드가 `Callable` 객체의 `call()`메소드를 모두 실행하고 T 타입의 값을 리턴하면, Future의 `get()`메소드는 블로킹이 해제되고 T 타입의 값을 리턴한다.
+
+
 
 
 
