@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [비효율 개선 프로젝트] 00. 체크리스트 점검 자동화 - 업무용 사이드 프로젝트
+title: 소소소플젝 00. 체크리스트 점검 자동화 - 업무용 사이드 프로젝트
 categories: [Project]
 tags: [Java]
 description: 업무시 나를 보다 편하게 해주기 위해 진행하는 소소한 프로젝트
