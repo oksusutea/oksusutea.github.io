@@ -5,7 +5,8 @@ paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
 highlighter: rouge
 markdown: kramdown
-disqus: dbyll
+disqus: oksusutea-github-io
+
 google_analytics: dbyll
 title: Oksusutea's Blog
 
@@ -30,6 +31,10 @@ tags_path: tags.html
 
 # set it as url of an image
 # sidebar_background_image: https://www.dropbox.com/s/g9h23zrycedxtk5/sky.png?raw=1
+
+# To use Disqus comments, sign up to https://disqus.com and fill in your Disqus shortname (NOT the userid)
+#disqus: ""
+
 
 BASE_PATH:
 
