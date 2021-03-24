@@ -49,4 +49,5 @@ comments: true
 * Selenium
 * JUnit (테스트 라이브러리)
 * Swing (GUI 프레임워크, 미점검자 표기용)
+* Property (설정값 저장용 내장 라이브러리)
 
