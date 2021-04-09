@@ -39,8 +39,6 @@ comments: true
 
 클라이언트에서는 Target Interface를 호출하는 것처럼 보인다. 하지만 클라이언트의 요청을 전달받은 (Target Interface를 구현한) Adapter는 자신이 감싸고 있는 Adaptee에게 실질적인 처리를 위임한다. Adapter가 Adaptee를 감싸고 있는 것 때문에 Wrapper 패턴이라고도 불려진다.
 
-###
-
 
 ### Adapter Pattern 사용 이유
 
@@ -91,7 +89,9 @@ public InputStreamReader(InputStream in) {
 * Adaptee가 기대하는 방식으로 클라이언트의 요청을 간접적으로 변경한다.
 * 호환되지 않는 우리의 인터페이스와 Adaptee를 함께 사용할 수 있다. 
 
+##### 어댑터 패턴과 프록시 패턴의 차이점
 
+* 어댑터 패턴은 기존에 호환되지 않는 객체를 호환될 수 있도록 중간에 어댑터라는 다리를 통해 변환해주는 작업을 목적으로 하지만, 프록시 패턴은 객체의 동일한 인터페이스를 사용한다.
 
 ***
 
