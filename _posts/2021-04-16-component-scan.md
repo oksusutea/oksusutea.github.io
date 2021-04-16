@@ -1,6 +1,6 @@
 ---
 layout: post
-title: @Component와 @ComponentScan
+title: Component와 ComponentScan
 categories: [Spring]
 tags: [Spring Framework, Spring Core]
 description: 스프링 프레임워크에서 빈을 등록하는 범위와 방식

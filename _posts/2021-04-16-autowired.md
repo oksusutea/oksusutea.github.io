@@ -1,6 +1,6 @@
 ---
 layout: post
-title: @Autowired
+title: Autowired
 categories: [Spring]
 tags: [Spring Framework, Spring Core]
 description: 스프링 프레임워크에서 객체를 주입받는 방식과 동작 원리
