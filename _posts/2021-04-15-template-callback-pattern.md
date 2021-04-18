@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Strategy Pattern
+title: Template Callback Pattern
 categories: [Design Pattern]
 tags: [Design Pattern, OOP]
 description: 스프링에서 사용되는 디자인 패턴 (8) 템플릿 콜백 패턴
