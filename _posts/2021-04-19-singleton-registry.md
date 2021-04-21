@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: 싱글톤 레지스트리
