@@ -9,7 +9,7 @@ comments: true
 ---
 
 ## HTTP Message Converter
-요청 본문에서 메시지를 읽거나(@RequestBody), 응답 본문에 메시지를 작성할 때(@ResponseBody) 사용한다.
+요청 본문에서 메시지를 읽거나(@RequestBody), 응답 본문에 메시지를 작성할 때(@ResponseBody) 사용한다. HTTP 요청에 메시지 본문과 응답 메시지 본문을 통째로 메시지로 다루도록 하는 방식이다.
 
 ```java
 @GetMapping("/message")
@@ -24,8 +24,15 @@ public  String message(@RequestBody Person person){
 `@ResponseBody` 애노테이션은, 리턴 값을 응답의 본문으로 반환하는 역할을 한다.
 
 #### 기본 HTTP 메시지 컨버터
-* 바이트 배열 컨버터
-* 문자열 컨버터
+메시지 컨버터는 `AnnotationMethodHandlerAdapter`를 통해 등록한다.
+
+* 바이트 배열 컨버터 -- `byteArrayHttpMessageConverter`
+	* Request시 : 요청 메시지를 `byte[]`로 컨버전 할 수 있다.
+	* Response시 : `Content-Type:application/octet-stream`으로 설정된다
+	* 컨트롤러가 byte배열에 담긴 바이너리 정보를 클라이언트에게 전송할 때 외에는 유용하지 않다.
+* 문자열 컨버터  -- `StringHttpMessageConverter`
+	* Request시 : 요청 메시지의 본문을 그대로 String으로 가져온다.
+	* Response시 : `Content-Type:text/plain`으로 전달된다.
 * Resource 컨버터
 * Form 컨버터
 * (JAXB2 컨버터) - XML용
@@ -35,7 +42,7 @@ public  String message(@RequestBody Person person){
 * .....
 
 ### HTTP 메시지 컨버터 적용 방법
-* 기본으로 등록해주는 컨버너테 새로운 컨버터 추가하기 : `extendMessageConverters`
+* 기본으로 등록해주는 컨버터에 새로운 컨버터 추가하기 : `extendMessageConverters`
 * 기본으로 등록해주는 컨버터는 다 무시하고 새로운 컨버터 설정하기 : `configureMessageConverters`
 * 의존성 추가로 컨버터 등곧
 	* 메이븐 또는 그래들 설정에 의존성을 추가하면 그에 따른 컨버터가 자동으로 등록된다.
