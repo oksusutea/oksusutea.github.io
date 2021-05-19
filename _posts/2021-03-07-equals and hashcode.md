@@ -11,6 +11,10 @@ comments: true
 자바에서는 여러가지 방법으로 객체의 동등성, 동일성에 대해 판단한다. 
 여기서는 가장 자주 사용되는 세가지 비교법에 대해 정리해본다. 
 
+## 동등성과 동일성
+* 동등성 : 실질적으로 서로 같은 인스턴스임을 의미한다.
+* 동일성 : 인스턴스가 다르지만 내부적으로 갖고 있는 값이 같을 경우 동일하다고 한다.
+
 ## ==연산자
 ==연산자는 피연산자가 primitive type(int, double, boolean...)일 때는 값이 같은지 비교하고, 피연산자가 reference type일 때는 가르키는 객체가 같은지 비교한다. 즉, 두 객체가 같은 것을 가르킬 때에만 true를 반환한다.
 
@@ -27,8 +31,8 @@ System.out.println(str4 == str5);//true (각각 객체를 생성했기 때문에
 
 ## equals()
 객체의 내부 값이 같은지, 동등성을 판단하는 메소드이다.  
-기본적으로는 primitive type은 값이 같은지 검사하고, reference type은 객체의 주소가 같은지 검사한다.  
-하지만 보통 'equals'는 내부 객체의 값이 같은지를 판단할 때 검사하기 때문에, 개발자가 클래스를 설계할 때 보통 ,equals()를 오버라이드하여 재정의한다.(equals()는 Object클래스의 메서드이기 때문에 오버라이딩 할 수 있다)
+오버라이딩 전에는 primitive type은 값이 같은지 검사하고, reference type은 객체의 주소가 같은지 검사한다.  
+하지만 보통 'equals'는 내부 객체의 값이 같은지를 판단할 때 검사하기 때문에, 개발자가 클래스를 설계할 때 보통 equals()를 오버라이드하여 재정의한다.(equals()는 Object클래스의 메서드이기 때문에 오버라이딩 할 수 있다)
 
 ```java
 String str1 = "hello";
@@ -152,11 +156,12 @@ public boolean equals(Object obj) {
 
 
 ## hashCode()
-객체 해시코드란 **런타임 중 객체를 식별할 하나의 정수값**을 말한다. Object 클래스의 `hashCode()`는 객체의 메모리 번지를 이용해 해시코드를 만들어 리턴하기 때문에 객체마다 다른 값을 가지고 있다.  보통 `HashSet, HashMap, HashTable`등 해쉬와 연관된 컬렉션 프레임워크에서 hashCode()를 이용하여 두 객체가 동등한지 비교한다.
+정확히 말하면 `hashCode()`는 동등성과 동일성을 모두 식별할 수 없다. 내부적으로 해시 충돌이 발생할 수 있기 때문이다. 하지만 `equals()`와 결합하여 사용하면 객체의 **동일성**을 판별할 수 있다.  
+객체 해시코드란 **런타임 중 객체를 식별할 하나의 정수 값**을 말한다. Object 클래스의 `hashCode()`는 JVM마다 구현하는 방식이 다르다. 가장 많이 사용하는 OpenJDK의 경우에는 Native 메소드를 이용해 해싱 값을 가져온다. 보통은 객체의 메모리 번지를 이용해 해시코드를 만들어 리턴하기 때문에 객체마다 다른 값을 가지고 있다.  보통 `HashSet, HashMap, HashTable`등 해쉬와 연관된 컬렉션 프레임워크에서 key와 관련된 작업을 할 때 hashCode()를 이용하여 두 객체가 동등한지 비교한다.
 > HashMap코드를 타고타고 보다보면, HashMap.get() 메소드에서 그리고 hashCode()를 기준으로 key값을 비교한다는 것을 확인할 수 있다. 즉, **인스턴스의 hashCode 메소드 결과과 같다면 동일한 key로 간주**하겠다는 것이다.
 > 
 
-객체의 동등성을 판단할 때, 우선 `hashCode()` 메소드를 실행해서 리턴된 해시코드 값이 같은지 비교한다. 해시코드 값이 다를시 다른 객체로 판단하고, 해시코드 값이 같을 경우 `equals()`메소드로 다시 비교한다. 두 메소드가 모두 true를 반환해야 동등 객체로 판단한다.
+객체의 동등성을 판단할 때, 우선 `hashCode()` 메소드를 실행해서 리턴된 해시코드 값이 같은지 비교한다. 해시코드 값이 다를시 다른 객체로 판단하고, 해시코드 값이 같을 경우 `equals()`메소드로 다시 비교한다. 두 메소드가 모두 true를 반환해야 동일한 객체로 판단한다.
 
 <p style="center">
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FBd6RF%2FbtqBqixoMPq%2Fgauk75M1Fiv2HFG8kUzOA0%2Fimg.png">
