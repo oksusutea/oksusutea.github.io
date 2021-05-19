@@ -110,13 +110,13 @@ public class Singleton{
 
 ```java
 public class Singleton{
-	private volatile static Singleton instance;
+	private static volatile Singleton instance;
 	private Singleton(){}
 	
-	public static synchronized Singleton getInstance(){
-		if(Objects.isNull(instance)){
+	public static Singleton getInstance(){
+		if(instacne == null){
 			synchronized(Singleton.class) {
-				if(Objects.isNull(instance)){
+				if(instance == null){
 					instance = new Singleton();
 				}
 			}
