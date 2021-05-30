@@ -1,9 +1,9 @@
 ---
 layout: post
-title: RESTTemplate
+title: RestTemplate
 categories: [Spring]
 tags: [Spring Framework, Template]
-description: 
+description: Template 패턴의 실 예
 fullview: false
 comments: true
 ---
