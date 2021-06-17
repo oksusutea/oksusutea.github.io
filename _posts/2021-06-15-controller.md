@@ -74,7 +74,7 @@ public interface Controller {
 * 특정 클래스를 전략 빈으로 등록할 경우 디폴트 전략은 모두 무시된다는 점을 유의하자.
 
 ### ControllerClassNameHandlerMapping
-* 빈 이름대신 클래스 이름을 URL에 맵핑해주는 클래스읻.
+* 빈 이름대신 클래스 이름을 URL에 맵핑해주는 클래스이다.
 * 기본적으로 클래스 이름을 모두 URL로 사용하지만, Controller로 끝나면 Controller를 뺀 나머지 이름을 URL에 맵핑해준다.
 
 ### SimpleUrlHandlerMapping
